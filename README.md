@@ -10,6 +10,34 @@ Implemented on the open-source [IIC-OSIC-Tools](https://github.com/iic-jku/iic-o
 
 Sized a 5-stage inverter ring per the SERO procedure to target a specific oscillation frequency in xschem and verified startup and oscillation frequency pre-layout in ngspice. Following which the layout was drawn using Klayout and DRC and LVS run was performed through the built-in macros in Klayout as well as the scripts provided in the docker.
 
+### Design
+
+The ring oscillator is built from a chain of 5 CMOS inverter stages, closed into a loop.
+
+![Inverter stage](/simulations/results/inverter.png)
+
+Full SERO schematic (xschem):
+
+![SERO schematic](/simulations/results/sero.png)
+
+### Layout
+
+Layout drawn in KLayout, verified with DRC/LVS:
+
+![SERO layout](/simulations/results/sero_lyt.png)
+
+### Simulation Results
+
+**Transient response — pre-layout (schematic) vs. post-layout (PEX):**
+
+![Transient response, schematic](/simulations/results/tran_sero.png)
+![Transient response, post-layout (PEX)](/simulations/results/tran_sero_pex.png)
+
+**Frequency vs. supply voltage (VDD):**
+
+![Frequency vs VDD, schematic](/simulations/results/vdd_v_freq.png)
+![Frequency vs VDD, post-layout (PEX)](/simulations/results/vdd_v_freq_pex.png)
+
 ## Result
 
 Post-layout frequency came in noticeably below the schematic estimate(~ 40% reduction), intially a linear chain topology was used, then a circular topology was implemented which resulted in about 85MHz of gain in frequency.
