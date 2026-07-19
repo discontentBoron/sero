@@ -1,0 +1,23 @@
+19-Jul-2026 10:40:03 | INFO    | Your Klayout version is: KLayout 0.30.9 (required >= 0.30.5)
+19-Jul-2026 10:40:03 | INFO    | Running SG13G2 LVS checks on design /foss/designs/sero/design/layout/sero_lyt.gds on cell sero_lyt
+19-Jul-2026 10:40:08 | ERROR   | KLayout run failed with exit code 1.
+19-Jul-2026 10:40:08 | ERROR   | KLayout stderr: ERROR: In /foss/pdks/ihp-sg13g2/libs.tech/klayout/tech/lvs/sg13g2.lvs: Can't find a schematic counterpart for the top cell sero_lyt - use 'same_circuit' to establish a correspondence
+19-Jul-2026 10:40:08 | ERROR   | KLayout stderr: ERROR: RuntimeError: Can't find a schematic counterpart for the top cell sero_lyt - use 'same_circuit' to establish a correspondence in Executable::execute
+19-Jul-2026 10:40:08 | INFO    | ==============================================================================
+19-Jul-2026 10:40:08 | INFO    | Important Summary
+19-Jul-2026 10:40:08 | INFO    | +------------------+--------------------------------------------------------------+
+19-Jul-2026 10:40:08 | INFO    | | Status           | PASS                                                         |
+19-Jul-2026 10:40:08 | INFO    | | Mode             | COMPARE                                                      |
+19-Jul-2026 10:40:08 | INFO    | | Outcome          | Comparison mode: PASS (netlists match).                      |
+19-Jul-2026 10:40:08 | INFO    | | Layout           | sero_lyt.gds                                                 |
+19-Jul-2026 10:40:08 | INFO    | | Top Cell         | sero_lyt                                                     |
+19-Jul-2026 10:40:08 | INFO    | | Results Dir      | /foss/designs/sero/verification/lvs                          |
+19-Jul-2026 10:40:08 | INFO    | | Warnings         | 0                                                            |
+19-Jul-2026 10:40:08 | INFO    | | Errors           | 3                                                            |
+19-Jul-2026 10:40:08 | INFO    | | Run Time (s)     | 5.674                                                        |
+19-Jul-2026 10:40:08 | INFO    | +------------------+--------------------------------------------------------------+
+19-Jul-2026 10:40:08 | ERROR   | Key errors:
+19-Jul-2026 10:40:08 | ERROR   |   - KLayout run failed with exit code 1.
+19-Jul-2026 10:40:08 | ERROR   |   - KLayout stderr: ERROR: In /foss/pdks/ihp-sg13g2/libs.tech/klayout/tech/lvs/sg13g2.lvs: Can't find a schematic counterpart for the top cell sero_lyt - use 'same_circuit' to establish a correspondence
+19-Jul-2026 10:40:08 | ERROR   |   - KLayout stderr: ERROR: RuntimeError: Can't find a schematic counterpart for the top cell sero_lyt - use 'same_circuit' to establish a correspondence in Executable::execute
+19-Jul-2026 10:40:08 | INFO    | ==============================================================================

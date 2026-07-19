@@ -1,0 +1,16 @@
+* Extracted by KLayout with SG13G2 LVS runset on : 18/07/2026 21:32
+
+.SUBCKT sero gnd osc_out vdd
+X$2 gnd vdd osc_out \$11 inverter
+X$3 gnd vdd \$11 \$10 inverter
+X$4 gnd vdd \$10 \$9 inverter
+X$5 gnd vdd \$9 \$8 inverter
+X$6 gnd vdd \$8 osc_out inverter
+.ENDS sero
+
+.SUBCKT inverter gnd vdd vout vin
+M$1 gnd vin vout gnd sg13_lv_nmos L=0.13u W=0.15u AS=0.1005p AD=0.1005p
++ PS=1.34u PD=1.34u rfmode=0
+M$2 vdd vin vout vdd sg13_lv_pmos L=0.13u W=0.25u AS=0.1075p AD=0.1075p
++ PS=1.34u PD=1.34u rfmode=0
+.ENDS inverter

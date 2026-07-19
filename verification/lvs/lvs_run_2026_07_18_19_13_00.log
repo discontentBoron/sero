@@ -1,0 +1,16 @@
+18-Jul-2026 21:13:00 | INFO    | Your Klayout version is: KLayout 0.30.9 (required >= 0.30.5)
+18-Jul-2026 21:13:00 | INFO    | Running SG13G2 LVS checks on design /foss/designs/sero/design/layout/sero.gds on cell sero
+18-Jul-2026 21:13:03 | INFO    | ==============================================================================
+18-Jul-2026 21:13:03 | INFO    | Important Summary
+18-Jul-2026 21:13:03 | INFO    | +------------------+--------------------------------------------------------------+
+18-Jul-2026 21:13:03 | INFO    | | Status           | PASS                                                         |
+18-Jul-2026 21:13:03 | INFO    | | Mode             | COMPARE                                                      |
+18-Jul-2026 21:13:03 | INFO    | | Outcome          | Comparison mode: PASS (netlists match).                      |
+18-Jul-2026 21:13:03 | INFO    | | Layout           | sero.gds                                                     |
+18-Jul-2026 21:13:03 | INFO    | | Top Cell         | sero                                                         |
+18-Jul-2026 21:13:03 | INFO    | | Results Dir      | /foss/designs/sero/verification/lvs                          |
+18-Jul-2026 21:13:03 | INFO    | | Warnings         | 0                                                            |
+18-Jul-2026 21:13:03 | INFO    | | Errors           | 0                                                            |
+18-Jul-2026 21:13:03 | INFO    | | Run Time (s)     | 3.304                                                        |
+18-Jul-2026 21:13:03 | INFO    | +------------------+--------------------------------------------------------------+
+18-Jul-2026 21:13:03 | INFO    | ==============================================================================
