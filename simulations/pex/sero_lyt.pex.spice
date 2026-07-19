@@ -1,0 +1,51 @@
+* PEX produced on Sun Jul 19 12:28:05 PM CEST 2026 using /foss/tools/sak/iic-pex.sh with m=3 and s=1
+* NGSPICE file created from sero_pex.ext - technology: ihp-sg13g2
+
+.subckt sero_pex vdd gnd osc_out
+X0 vdd inverter_1.vin inverter_0.vin vdd sg13_lv_pmos ad=0.1075p pd=1.34u as=0.1075p ps=1.34u w=0.25u l=0.13u
+X1 inverter_2.vin inverter_3.vin vdd vdd sg13_lv_pmos ad=0.1075p pd=1.34u as=0.1075p ps=1.34u w=0.25u l=0.13u
+X2 gnd inverter_2.vin inverter_1.vin gnd.t1 sg13_lv_nmos ad=0.1005p pd=1.34u as=0.1005p ps=1.34u w=0.15u l=0.13u
+X3 inverter_3.vin osc_out gnd gnd.t0 sg13_lv_nmos ad=0.1005p pd=1.34u as=0.1005p ps=1.34u w=0.15u l=0.13u
+X4 gnd inverter_0.vin osc_out gnd.t4 sg13_lv_nmos ad=0.1005p pd=1.34u as=0.1005p ps=1.34u w=0.15u l=0.13u
+X5 vdd inverter_2.vin inverter_1.vin vdd sg13_lv_pmos ad=0.1075p pd=1.34u as=0.1075p ps=1.34u w=0.25u l=0.13u
+X6 inverter_2.vin inverter_3.vin gnd gnd.t2 sg13_lv_nmos ad=0.1005p pd=1.34u as=0.1005p ps=1.34u w=0.15u l=0.13u
+X7 vdd inverter_0.vin osc_out vdd sg13_lv_pmos ad=0.1075p pd=1.34u as=0.1075p ps=1.34u w=0.25u l=0.13u
+X8 inverter_3.vin osc_out vdd vdd sg13_lv_pmos ad=0.1075p pd=1.34u as=0.1075p ps=1.34u w=0.25u l=0.13u
+X9 gnd inverter_1.vin inverter_0.vin gnd.t3 sg13_lv_nmos ad=0.1005p pd=1.34u as=0.1005p ps=1.34u w=0.15u l=0.13u
+R0 gnd.n5 gnd.n0 17270.3
+R1 gnd.n5 gnd.t4 9459.67
+R2 gnd.n2 gnd.n0 7551.56
+R3 gnd.n6 gnd.n5 5262.48
+R4 gnd.t2 gnd.n0 5179.33
+R5 gnd.n1 gnd.t0 3099.58
+R6 gnd.n4 gnd.t3 3099.58
+R7 gnd.n3 gnd.t1 3099.58
+R8 gnd.n6 gnd.t0 2203.32
+R9 gnd.n1 gnd.t2 2203.32
+R10 gnd.t4 gnd.n4 2203.32
+R11 gnd.n3 gnd.t3 2203.32
+R12 gnd.t1 gnd.n2 2203.32
+R13 gnd.n4 gnd 34.0005
+R14 gnd gnd.n3 34.0005
+R15 gnd.n2 gnd 34.0005
+R16 gnd gnd.n1 34.0005
+R17 gnd gnd.n6 34.0005
+C0 vdd inverter_3.vin 0.20427f
+C1 inverter_3.vin osc_out 0.03653f
+C2 inverter_2.vin vdd 0.31399f
+C3 inverter_2.vin osc_out 0.02759f
+C4 vdd osc_out 0.3028f
+C5 inverter_1.vin inverter_0.vin 0.04073f
+C6 inverter_1.vin inverter_2.vin 0.03706f
+C7 inverter_1.vin vdd 0.2114f
+C8 inverter_0.vin vdd 0.20313f
+C9 inverter_0.vin osc_out 0.04301f
+C10 inverter_2.vin inverter_3.vin 0.03499f
+C11 osc_out gnd 0.67763f
+C12 vdd gnd 0.66339f
+C13 inverter_3.vin gnd 0.3483f
+C14 inverter_2.vin gnd 0.65426f
+C15 inverter_1.vin gnd 0.32931f
+C16 inverter_0.vin gnd 0.34353f
+.ends
+

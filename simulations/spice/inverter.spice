@@ -1,0 +1,6 @@
+** sch_path: /foss/designs/sero/design/schematics/inverter.sch
+.subckt inverter vdd gnd vin vout
+*.PININFO vdd:B gnd:B vin:I vout:O
+MM2 vout vin gnd gnd sg13_lv_nmos w=0.15u l=0.13u ng=1
+MM1 vout vin vdd vdd sg13_lv_pmos w=0.25u l=0.13u ng=1
+.ends

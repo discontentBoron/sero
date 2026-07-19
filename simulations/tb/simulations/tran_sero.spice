@@ -1,0 +1,63 @@
+** sch_path: /foss/designs/sero/simulations/tb/tran_sero.sch
+**.subckt tran_sero osc_out
+*.opin osc_out
+x1 VDD osc_out 0 sero
+V1 VDD 0 1.2
+**** begin user architecture code
+
+.lib cornerMOSlv.lib mos_tt
+
+
+
+.param length=150n
+.param temp=27
+.control
+  save all
+  tran 2p 10n
+
+  meas tran t1 when v(osc_out)=0.6 rise=3
+  meas tran t2 when v(osc_out)=0.6 rise=4
+  let freq = 1 / (t2 - t1)
+
+  echo "========================================================================"
+  echo "                SINGLE RUN TRANSIENT PERFORMANCE METRICS                "
+  echo "========================================================================"
+  print freq
+  echo "========================================================================"
+
+  write tran_sero.raw
+.endc
+
+
+**** end user architecture code
+**.ends
+
+* expanding   symbol:  /foss/designs/sero/design/symbol/sero.sym # of pins=3
+** sym_path: /foss/designs/sero/design/symbol/sero.sym
+** sch_path: /foss/designs/sero/design/schematics/sero.sch
+.subckt sero vdd osc_out gnd
+*.opin osc_out
+*.iopin vdd
+*.iopin gnd
+x6 vdd osc_out net1 gnd inverter
+x1 vdd net1 net2 gnd inverter
+x2 vdd net2 net3 gnd inverter
+x3 vdd net3 net4 gnd inverter
+x4 vdd net4 osc_out gnd inverter
+.ends
+
+
+* expanding   symbol:  /foss/designs/sero/design/symbol/inverter.sym # of pins=4
+** sym_path: /foss/designs/sero/design/symbol/inverter.sym
+** sch_path: /foss/designs/sero/design/schematics/inverter.sch
+.subckt inverter vdd vin vout gnd
+*.iopin vdd
+*.iopin gnd
+*.ipin vin
+*.opin vout
+XM2 vout vin gnd gnd sg13_lv_nmos w=0.15u l=0.13u ng=1 m=1 mm_ok=1
+XM1 vout vin vdd vdd sg13_lv_pmos w=0.25u l=0.13u ng=1 m=1 mm_ok=1
+.ends
+
+.GLOBAL VDD
+.end

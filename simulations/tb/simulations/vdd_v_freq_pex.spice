@@ -1,0 +1,83 @@
+** sch_path: /foss/designs/sero/simulations/tb/vdd_v_freq_pex.sch
+**.subckt vdd_v_freq_pex osc_out
+*.opin osc_out
+x1 VDD 0 osc_out sero_pex
+V1 VDD 0 {vdd_val}
+**** begin user architecture code
+
+.lib cornerMOSlv.lib mos_tt
+
+
+
+.param length=150n
+.param vdd_val=1.2
+.param temp=27
+.ic v(x1.inverter_0.vin)=1.2
+.include /foss/designs/sero/simulations/pex/sero.pex.spice
+.control
+  save all
+  let v_start = 0.96
+  let v_stop  = 1.44
+  let v_step  = 0.06
+  let n_pts   = 9
+  let vdds  = vector(n_pts)
+  let freqs = vector(n_pts)
+  let powers = vector(n_pts)
+  let idx = 0
+
+  while idx < n_pts
+    let v_curr = v_start + idx * v_step
+    alterparam vdd_val = $&v_curr
+    reset
+    tran 2p 6n
+    meas tran t1 when v(osc_out)=0.5*v_curr rise=4
+    meas tran t2 when v(osc_out)=0.5*v_curr rise=5
+    meas tran iavg avg i(v1) from=2n to=6n
+    let freqs[idx] = 1 / (t2 - t1)
+    let powers[idx] = -iavg * v_curr
+    let vdds[idx]  = v_curr
+    let idx = idx + 1
+  end
+
+  set curplot = control
+  write vdd_v_freq_pex.raw freqs vdds powers
+.endc
+
+
+
+**** end user architecture code
+**.ends
+
+* expanding   symbol:  /foss/designs/sero/design/symbol/sero.sym # of pins=3
+** sym_path: /foss/designs/sero/design/symbol/sero.sym
+** sch_path: /foss/designs/sero/design/schematics/sero.sch
+.subckt sero vdd osc_out gnd
+*.opin osc_out
+*.iopin vdd
+*.iopin gnd
+x6 vdd osc_out net1 gnd inverter
+x1 vdd net1 net2 gnd inverter
+x2 vdd net2 net3 gnd inverter
+x3 vdd net3 net4 gnd inverter
+x4 vdd net4 osc_out gnd inverter
+.ends
+
+
+* expanding   symbol:  sero_pex.sym # of pins=3
+** sym_path: /foss/designs/sero/design/symbol/sero.sym
+.include /foss/designs/sero/simulations/pex/sero_lyt.pex.spice
+
+* expanding   symbol:  /foss/designs/sero/design/symbol/inverter.sym # of pins=4
+** sym_path: /foss/designs/sero/design/symbol/inverter.sym
+** sch_path: /foss/designs/sero/design/schematics/inverter.sch
+.subckt inverter vdd vin vout gnd
+*.iopin vdd
+*.iopin gnd
+*.ipin vin
+*.opin vout
+XM2 vout vin gnd gnd sg13_lv_nmos w=0.15u l=0.13u ng=1 m=1 mm_ok=1
+XM1 vout vin vdd vdd sg13_lv_pmos w=0.25u l=0.13u ng=1 m=1 mm_ok=1
+.ends
+
+.GLOBAL VDD
+.end

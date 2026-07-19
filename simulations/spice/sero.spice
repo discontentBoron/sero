@@ -1,0 +1,19 @@
+** sch_path: /foss/designs/sero/design/schematics/sero.sch
+.subckt sero osc_out vdd gnd
+*.PININFO osc_out:O vdd:B gnd:B
+x6 vdd osc_out net1 gnd inverter
+x1 vdd net1 net2 gnd inverter
+x2 vdd net2 net3 gnd inverter
+x3 vdd net3 net4 gnd inverter
+x4 vdd net4 osc_out gnd inverter
+.ends
+
+* expanding   symbol:  /foss/designs/sero/design/symbol/inverter.sym # of pins=4
+** sym_path: /foss/designs/sero/design/symbol/inverter.sym
+** sch_path: /foss/designs/sero/design/schematics/inverter.sch
+.subckt inverter vdd vin vout gnd
+*.PININFO vdd:B gnd:B vin:I vout:O
+MM2 vout vin gnd gnd sg13_lv_nmos w=0.15u l=0.13u ng=1
+MM1 vout vin vdd vdd sg13_lv_pmos w=0.25u l=0.13u ng=1
+.ends
+

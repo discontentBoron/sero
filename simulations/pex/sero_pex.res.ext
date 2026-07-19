@@ -1,0 +1,52 @@
+scale 1000 1 0.5
+rnode "gnd" 0 0 349 1 0
+rnode "gnd" 0 -0 388 949 0
+rnode "gnd" 0 0 388 949 0
+rnode "gnd" 0 0 388 949 0
+rnode "gnd" 0 0 349 1 0
+rnode "gnd.t0" 0 0 842 118 0
+rnode "gnd.n0" 0 0 1417 500 0
+rnode "gnd.t3" 0 0 945 882 0
+rnode "gnd" 0 -0 388 949 0
+rnode "gnd.t2" 0 0 1268 118 0
+rnode "gnd.n1" 0 0 1091 119 0
+rnode "gnd" 0 -0 349 1 0
+rnode "gnd" 0 -0 388 949 0
+rnode "gnd.n2" 0 0 1548 881 0
+rnode "gnd.t1" 0 0 1371 882 0
+rnode "gnd.n3" 0 0 1122 881 0
+rnode "gnd.n4" 0 0 696 881 0
+rnode "gnd.t4" 0 0 519 882 0
+rnode "gnd.n5" 0 0 565 500 0
+rnode "gnd.n6" 0 0 665 119 0
+resist "gnd" "gnd" 1.177
+resist "gnd" "gnd" 1.3508
+resist "gnd" "gnd" 1.59803
+resist "gnd" "gnd" 1.6566
+resist "gnd" "gnd" 1.8304
+resist "gnd" "gnd" 2.2462
+resist "gnd" "gnd" 2.5938
+resist "gnd" "gnd" 3.5596
+resist "gnd" "gnd.n6" 34
+resist "gnd" "gnd.n1" 34
+resist "gnd.n2" "gnd" 34
+resist "gnd" "gnd.n3" 34
+resist "gnd.n4" "gnd" 34
+resist "gnd.t1" "gnd.n2" 2203.32
+resist "gnd.n3" "gnd.t3" 2203.32
+resist "gnd.t4" "gnd.n4" 2203.32
+resist "gnd.n1" "gnd.t2" 2203.32
+resist "gnd.n6" "gnd.t0" 2203.32
+resist "gnd.n3" "gnd.t1" 3099.58
+resist "gnd.n4" "gnd.t3" 3099.58
+resist "gnd.n1" "gnd.t0" 3099.58
+resist "gnd.t2" "gnd.n0" 5179.33
+resist "gnd.n6" "gnd.n5" 5262.48
+resist "gnd.n2" "gnd.n0" 7551.56
+resist "gnd.n5" "gnd.t4" 9459.67
+resist "gnd.n5" "gnd.n0" 17270.3
+device msubckt sg13_lv_nmos 506 867 507 868  "gnd.t4" "inverter_0.vin" 52 0 "osc_out" 30 4020,268 "gnd" 30 4020,268
+device msubckt sg13_lv_nmos 932 867 933 868  "gnd.t3" "inverter_1.vin" 52 0 "inverter_0.vin" 30 4020,268 "gnd" 30 4020,268
+device msubckt sg13_lv_nmos 1358 867 1359 868  "gnd.t1" "inverter_2.vin" 52 0 "inverter_1.vin" 30 4020,268 "gnd" 30 4020,268
+device msubckt sg13_lv_nmos 829 103 830 104  "gnd.t0" "osc_out" 52 0 "gnd" 30 4020,268 "inverter_3.vin" 30 4020,268
+device msubckt sg13_lv_nmos 1255 103 1256 104  "gnd.t2" "inverter_3.vin" 52 0 "gnd" 30 4020,268 "inverter_2.vin" 30 4020,268
