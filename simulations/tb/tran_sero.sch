@@ -7,13 +7,13 @@ F {}
 E {}
 B 2 0 0 800 400 {flags=graph
 y1=-0.11
-y2=1.4
+y2=1.2
 ypos1=0
 ypos2=2
 divy=5
 subdivy=1
 unity=1
-x2=4.2320543e-09
+x2=6.3927258e-09
 divx=5
 subdivx=1
 xlabmag=1.0
@@ -25,7 +25,7 @@ dataset=-1
 unitx=1
 logx=0
 logy=0
-x1=3.1583125e-09
+x1=5.0505485e-09
 }
 N 180 -290 180 -260 {lab=VDD}
 N 180 -100 180 -70 {lab=0}
@@ -41,12 +41,12 @@ C {opin.sym} 320 -180 0 0 {name=p1 lab=osc_out}
 C {vsource.sym} 40 -190 0 0 {name=V1 value=1.2 savecurrent=false}
 C {gnd.sym} 40 -90 0 0 {name=l3 lab=0}
 C {vdd.sym} 40 -270 0 0 {name=l4 lab=VDD}
-C {devices/code_shown.sym} -420 30 0 0 {name=MODEL only_toplevel=true
+C {devices/code_shown.sym} 450 -180 0 0 {name=MODEL only_toplevel=true
 format="tcleval( @value )"
 value="
-.lib cornerMOSlv.lib mos_tt
+.lib cornerMOSlv.lib mos_ss
 "}
-C {launcher.sym} -360 100 0 0 {name=h4
+C {launcher.sym} 510 -110 0 0 {name=h4
 descr=SimulateNGSPICE
 tclcommand="
 # Setup the default simulation commands if not already set up
@@ -70,14 +70,14 @@ write_data [save_params] $netlist_dir/[file rootname [file tail [xschem get curr
 xschem netlist
 simulate
 "}
-C {devices/launcher.sym} -360 160 0 0 {name=h3
+C {devices/launcher.sym} 510 -50 0 0 {name=h3
 descr="Load waves" 
 tclcommand="
  xschem raw_read $netlist_dir/[file rootname [file tail [xschem get current_name]]].raw tran
 xschem setprop rect 2 0 fullxzoom
 "
 }
-C {code.sym} -430 -130 0 0 {name=Transient only_toplevel=true 
+C {code.sym} 440 -340 0 0 {name=Transient only_toplevel=true 
 value="
 .param length=150n
 .param temp=27

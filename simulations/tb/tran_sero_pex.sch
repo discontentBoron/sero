@@ -5,16 +5,16 @@ V {}
 S {}
 F {}
 E {}
-B 2 0 0 800 400 {flags=graph
-y1=-0.042
+B 2 230 -520 1030 -120 {flags=graph
+y1=-0.057
 y2=1.3
 ypos1=0
 ypos2=2
 divy=5
 subdivy=1
 unity=1
-x1=0
-x2=1e-08
+x1=3.8494046e-09
+x2=5.2098555e-09
 divx=5
 subdivx=1
 xlabmag=1.0
@@ -26,24 +26,25 @@ logx=0
 logy=0
 rawfile=$netlist_dir/tran_sero_pex.raw
 color=6
-node=osc_out}
-N 40 -270 40 -220 {lab=VDD}
-N 40 -160 40 -90 {lab=0}
-N 180 -290 180 -260 {lab=VDD}
-N 260 -180 320 -180 {lab=osc_out}
-N 180 -100 180 -70 {lab=0}
-C {vdd.sym} 180 -290 0 0 {name=l1 lab=VDD}
-C {gnd.sym} 180 -70 0 0 {name=l2 lab=0}
-C {opin.sym} 320 -180 0 0 {name=p1 lab=osc_out}
-C {vsource.sym} 40 -190 0 0 {name=V1 value=1.2 savecurrent=false}
-C {gnd.sym} 40 -90 0 0 {name=l3 lab=0}
-C {vdd.sym} 40 -270 0 0 {name=l4 lab=VDD}
-C {devices/code_shown.sym} -420 30 0 0 {name=MODEL only_toplevel=true
+node=osc_out
+hilight_wave=0}
+N 270 -790 270 -740 {lab=VDD}
+N 270 -680 270 -610 {lab=0}
+N 410 -810 410 -780 {lab=VDD}
+N 490 -700 550 -700 {lab=osc_out}
+N 410 -620 410 -590 {lab=0}
+C {vdd.sym} 410 -810 0 0 {name=l1 lab=VDD}
+C {gnd.sym} 410 -590 0 0 {name=l2 lab=0}
+C {opin.sym} 550 -700 0 0 {name=p1 lab=osc_out}
+C {vsource.sym} 270 -710 0 0 {name=V1 value=1.2 savecurrent=false}
+C {gnd.sym} 270 -610 0 0 {name=l3 lab=0}
+C {vdd.sym} 270 -790 0 0 {name=l4 lab=VDD}
+C {devices/code_shown.sym} 750 -670 0 0 {name=MODEL only_toplevel=true
 format="tcleval( @value )"
 value="
 .lib cornerMOSlv.lib mos_ss
 "}
-C {launcher.sym} -360 100 0 0 {name=h4
+C {launcher.sym} 810 -600 0 0 {name=h4
 descr=SimulateNGSPICE
 tclcommand="
 # Setup the default simulation commands if not already set up
@@ -67,19 +68,19 @@ write_data [save_params] $netlist_dir/[file rootname [file tail [xschem get curr
 xschem netlist
 simulate
 "}
-C {devices/launcher.sym} -360 160 0 0 {name=h3
+C {devices/launcher.sym} 810 -540 0 0 {name=h3
 descr="Load waves" 
 tclcommand="
  xschem raw_read $netlist_dir/[file rootname [file tail [xschem get current_name]]].raw tran
 xschem setprop rect 2 0 fullxzoom
 "
 }
-C {code.sym} -310 -160 0 0 {name=Transient only_toplevel=true 
+C {code.sym} 860 -860 0 0 {name=Transient only_toplevel=true 
 value="
 .param temp=27
 .control
   save all 
-  tran 2p 10n
+  tran 2p 15n
   
   display
   
@@ -96,6 +97,6 @@ value="
   write tran_sero_pex.raw
 .endc
 "}
-C {/foss/designs/sero/design/symbol/sero.sym} 180 -180 0 0 {name=x1
+C {/foss/designs/sero/design/symbol/sero.sym} 410 -700 0 0 {name=x1
 schematic=sero_pex
 spice_sym_def=".include /foss/designs/sero/simulations/pex/sero_lyt.pex.spice"}

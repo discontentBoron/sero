@@ -5,9 +5,9 @@ V {}
 S {}
 F {}
 E {}
-B 2 0 0 800 400 {flags=graph
-y1=2.7e+09
-y2=6.6e+09
+B 2 450 -810 1250 -410 {flags=graph
+y1=1.9e+09
+y2=5.3e+09
 ypos1=0
 ypos2=2
 divy=5
@@ -29,9 +29,9 @@ logy=0
 sweep=vdds
 rawfile=$netlist_dir/vdd_v_freq.raw
 hilight_wave=0}
-B 2 830 0 1630 400 {flags=graph
-y1=1.5e-05
-y2=8.4e-05
+B 2 450 -390 1250 10 {flags=graph
+y1=1.1e-05
+y2=7e-05
 ypos1=0
 ypos2=2
 divy=5
@@ -51,17 +51,17 @@ unitx=1
 logx=0
 logy=0
 sweep=vdds}
-N 530 -370 530 -340 {lab=VDD}
-N 530 -180 530 -150 {lab=0}
-N 610 -260 670 -260 {lab=osc_out}
-N 370 -340 370 -280 {lab=VDD}
-N 370 -220 370 -160 {lab=0}
-C {devices/code_shown.sym} -10 -80 0 0 {name=MODEL only_toplevel=true
+N 200 -650 200 -620 {lab=VDD}
+N 200 -460 200 -430 {lab=0}
+N 280 -540 340 -540 {lab=osc_out}
+N 40 -620 40 -560 {lab=VDD}
+N 40 -500 40 -440 {lab=0}
+C {devices/code_shown.sym} 10 -60 0 0 {name=MODEL only_toplevel=true
 format="tcleval( @value )"
 value="
 .lib cornerMOSlv.lib mos_ss
 "}
-C {launcher.sym} 50 -210 0 0 {name=h4
+C {launcher.sym} 70 -190 0 0 {name=h4
 descr=SimulateNGSPICE
 tclcommand="
 # Setup the default simulation commands if not already set up
@@ -85,26 +85,24 @@ write_data [save_params] $netlist_dir/[file rootname [file tail [xschem get curr
 xschem netlist
 simulate
 "}
-C {devices/launcher.sym} 50 -150 0 0 {name=h3
+C {devices/launcher.sym} 70 -130 0 0 {name=h3
 descr="Load waves" 
 tclcommand="
 xschem raw_read $netlist_dir/[file rootname [file tail [xschem get current_name]]].raw
 xschem setprop rect 2 0 fullxzoom
 "
 }
-C {/foss/designs/sero/design/symbol/sero.sym} 530 -260 0 0 {name=x1}
-C {vdd.sym} 530 -370 0 0 {name=l1 lab=VDD}
-C {gnd.sym} 530 -150 0 0 {name=l2 lab=0}
-C {opin.sym} 670 -260 0 0 {name=p1 lab=osc_out}
-C {vsource.sym} 370 -250 0 0 {name=V1 value=\{vdd_val\} savecurrent=false}
-C {gnd.sym} 370 -160 0 0 {name=l3 lab=0}
-C {vdd.sym} 370 -340 0 0 {name=l4 lab=VDD}
-C {code.sym} -20 -380 0 0 {name=VDDSweep only_toplevel=true 
+C {/foss/designs/sero/design/symbol/sero.sym} 200 -540 0 0 {name=x1}
+C {vdd.sym} 200 -650 0 0 {name=l1 lab=VDD}
+C {gnd.sym} 200 -430 0 0 {name=l2 lab=0}
+C {opin.sym} 340 -540 0 0 {name=p1 lab=osc_out}
+C {vsource.sym} 40 -530 0 0 {name=V1 value=\{vdd_val\} savecurrent=false}
+C {gnd.sym} 40 -440 0 0 {name=l3 lab=0}
+C {vdd.sym} 40 -620 0 0 {name=l4 lab=VDD}
+C {code.sym} 0 -360 0 0 {name=VDDSweep only_toplevel=true 
 value="
-.param length=150n
+.ic v(osc_out) 0
 .param vdd_val=1.2
-.param temp=27
-
 .control
   save all
   let v_start = 0.96
@@ -120,18 +118,37 @@ value="
     let v_curr = v_start + idx * v_step
     alterparam vdd_val = $&v_curr
     reset
-    tran 2p 6n
-    meas tran t1 when v(osc_out)=0.5*v_curr rise=4
-    meas tran t2 when v(osc_out)=0.5*v_curr rise=5
-    meas tran iavg avg i(v1) from=2n to=6n
-    let freqs[idx] = 1 / (t2 - t1)
+
+    * --- Pilot run: rough period estimate ---
+    tran 2p 10n
+    meas tran tp1 when v(osc_out)=0.5*v_curr rise=2 td=5n
+    meas tran tp2 when v(osc_out)=0.5*v_curr rise=3 td=5n
+    let period_est = tp2 - tp1
+    let tstop_v     = 15 * period_est + 8n
+    let ifrom_v     = period_est * 8
+    let ito_v       = period_est * 12
+
+    * --- capture as plain control-level scalars BEFORE any further reset ---
+    set tstop_s = $&tstop_v
+    set ifrom_s = $&ifrom_v
+    set ito_s   = $&ito_v
+
+    * --- Re-run sized for settled oscillation ---
+    reset
+    alterparam vdd_val = $&v_curr
+    reset
+    tran 2p $tstop_s
+
+    meas tran t1 when v(osc_out)=0.5*v_curr rise=9  td=5n
+    meas tran t2 when v(osc_out)=0.5*v_curr rise=10 td=5n
+    meas tran iavg avg i(v1) from=$ifrom_s to=$ito_s
+
+    let freqs[idx]  = 1 / (t2 - t1)
     let powers[idx] = -iavg * v_curr
-    let vdds[idx]  = v_curr
+    let vdds[idx]   = v_curr
     let idx = idx + 1
   end
 
   set curplot = control
   write vdd_v_freq.raw freqs vdds powers
-.endc
-
-"}
+.endc"}
