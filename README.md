@@ -48,7 +48,7 @@ The following table shows the frequency in the typical(TT) and the slow(SS) corn
 | TT | 2.60 GHz |
 | SS | 1.98 GHz |
 
-## Limitations found
+## Limitations
 
 - **Frequency spread across process corners** Frequency is not the same across the process corners, no mechanism to regulate the output frequency depending on variation of various parameters.
 - **Layout-induced parasitic loss**, on top of the corner spread: initial placement (all 5 stages in a single row) forced the ring's closing connection to run the full length of the row, which is longer than any other inter-stage wire, then fixed with a folded (2-row) placement, leading to a slight improvement (~3%).
